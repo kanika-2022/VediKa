@@ -1,6 +1,6 @@
 <template>
   <div class="gallery-item-wrap">
-    <fdk-link :link="block.props.link.value">
+    <!-- <fdk-link :link="block.props.link.value"> -->
       <div class="common-card">
         <section>
           <!-- <div :style="`background: url(${block.props.image.value}) center center / cover no-repeat;width: 100%;height:100%`" v-if="block.props.image.value">
@@ -13,15 +13,15 @@
           />
           <fdk-placeholder v-else :type="'image'" />
         </section>
-        <p v-if="block.props.caption && block.props.caption.value.length > 0">
+        <h4 v-if="block.props.title && block.props.title.value.length > 0">
           <!--Overlay container, donot remove -->
-          {{ block.props.caption.value }}
-        </p>
-        <h4 v-if="block.props.caption && block.props.caption.value.length > 0">
-          {{ block.props.caption.value }}
+          {{ block.props.title.value }}
         </h4>
+        <p v-if="block.props.description && block.props.description.value.length > 0">
+          {{ block.props.description.value }}
+        </p>
       </div>
-    </fdk-link>
+    <!-- </fdk-link> -->
   </div>
 </template>
 <script>
@@ -70,48 +70,63 @@ export default {
         min-height: 100px;
       }
     }
+     
+    h4{
+      font-size: 25px;
+      font-family:"Century Gothic";
+      padding: 10px 30px;
+      margin: 30px;
 
-    p,
-    h4 {
-      display: flex;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      align-items: center;
-      justify-content: center;
-      color: @Black;
-      line-height: 20px;
-      font-size: 14px;
-      font-weight: 400;
-      text-transform: capitalize;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      height: 0;
-      transition: height 0.5s;
-      @media @tablet {
-        transition: unset;
-        height: 45px;
-      }
-      @media @mobile {
-        font-size: 12px;
-      }
     }
-    h4 {
-      z-index: 2;
-    }
-    p {
-      background: @White;
-      opacity: 0.7;
-      color: @White;
-      // height: 45px;
-    }
-    &:hover {
-      p,
-      h4 {
-        height: 45px;
-      }
-    }
-  }
+    p{
+      font-size: 16px;
+      font-family:"Century Gothic";
+      margin: 0;
+      line-height: 1.7;
+      text-align: justify;
 }
+    }
+    // p,
+    // h4 {
+    //   display: flex;
+    //   text-overflow: ellipsis;
+    //   overflow: hidden;
+    //   align-items: center;
+    //   justify-content: center;
+    //   color: @Black;
+    //   line-height: 20px;
+    //   font-size: 14px;
+    //   font-weight: 400;
+    //   text-transform: capitalize;
+    //   position: absolute;
+    //   bottom: 0;
+    //   right: 0;
+    //   left: 0;
+    //   height: 0;
+    //   transition: height 0.5s;
+    //   @media @tablet {
+    //     transition: unset;
+    //     height: 45px;
+    //   }
+    //   @media @mobile {
+    //     font-size: 12px;
+    //   }
+    // }
+    // h4 {
+    //   z-index: 2;
+    // }
+    // p {
+    //   background: @White;
+    //   opacity: 0.7;
+    //   color: @White;
+    //   // height: 45px;
+    // }
+    // &:hover {
+    //   p,
+    //   h4 {
+    //     height: 45px;
+    //   }
+    // }
+  }
+
 </style>

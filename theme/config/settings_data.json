@@ -2,58 +2,6 @@
   "list": [
     {
       "name": "Default",
-      "global": {
-        "static": {
-          "props": {
-            "colors": {
-              "primary_color": "#000000",
-              "secondary_color": "#000000",
-              "accent_color": "#000000",
-              "link_color": "#4499FF",
-              "button_secondary_color": "#000000",
-              "bg_color": "#F8F8F8"
-            },
-            "auth": {
-              "show_header_auth":false,
-              "show_footer_auth":false
-            }
-          }
-        },
-        "custom": {
-          "props": {
-            "header_bg_color": "#ffffff",
-            "header_text_color": "#000000",
-            "header_border_color": "#e1e1e1",
-            "header_icon_color": "#000000",
-            "header_cart_notification_bg_color": "#e8a76c",
-            "header_cart_notification_text_color": "#ffffff",
-            "header_nav_hover_color": "#999999",
-            "button_primary_color": "#ffffff",
-            "button_primary_label_color": "#000000",
-            "button_add_to_cart_color": "#000000",
-            "button_add_to_cart_label_color": "#ffffff",
-            "button_secondary_color": "#000000",
-            "button_secondary_label_color": "#ffffff",
-            "button_tertiary_color": "#000000",
-            "button_tertiary_label_color": "#000000",
-            "button_tertiary_hover_color": "#000000",
-            "button_tertiary_hover_text_color": "#ffffff",
-            "text_heading_link_color": "#000000",
-            "text_body_color": "#000000",
-            "text_price_color": "#000000",
-            "text_sale_price_color": "#fb406b",
-            "text_strikethrough_price_color": "#9b9b9b",
-            "text_discount_color": "#ee478d",
-            "footer_bg_color": "#ffffff",
-            "footer_text_color": "#999999",
-            "footer_border_color": "#e1e1e1",
-            "footer_nav_hover_color": "#000000",
-            "disable_cart": false,
-            "is_menu_below_logo": false,
-            "menu_position": "left"
-          }
-        }
-      },
       "page": [
         {
           "settings": {
@@ -87,51 +35,6 @@
     },
     {
       "name": "Dark",
-      "global": {
-        "static": {
-          "props": {
-            "colors": {
-              "primary_color": "#000000",
-              "secondary_color": "#000000",
-              "accent_color": "#000000",
-              "link_color": "#4499FF",
-              "button_secondary_color": "#000000",
-              "bg_color": "#F8F8F8"
-            }
-          }
-        },
-        "custom": {
-          "props": {
-            "header_bg_color": "#2e3032",
-            "header_text_color": "#ffffff",
-            "header_border_color": "#FFFFFF",
-            "header_icon_color": "#ffffff",
-            "header_cart_notification_bg_color": "#FFFFFF",
-            "header_cart_notification_text_color": "#2e3032",
-            "header_nav_hover_color": "#000000",
-            "button_primary_color": "#000000",
-            "button_primary_label_color": "#ffffff",
-            "button_add_to_cart_color": "#000000",
-            "button_add_to_cart_label_color": "#ffffff",
-            "button_secondary_color": "#000000",
-            "button_secondary_label_color": "#ffffff",
-            "button_tertiary_color": "#000000",
-            "button_tertiary_label_color": "#000000",
-            "button_tertiary_hover_color": "#000000",
-            "button_tertiary_hover_text_color": "#ffffff",
-            "text_heading_link_color": "#000000",
-            "text_body_color": "#000000",
-            "text_price_color": "#000000",
-            "text_sale_price_color": "#fb406b",
-            "text_strikethrough_price_color": "#9b9b9b",
-            "text_discount_color": "#ee478d",
-            "footer_bg_color": "#2e3032",
-            "footer_text_color": "#ffffff",
-            "footer_border_color": "#FFFFFF",
-            "footer_nav_hover_color": "#ffffff"
-          }
-        }
-      },
       "page": [
         {
           "settings": {
@@ -165,51 +68,6 @@
     },
     {
       "name": "Blue",
-      "global": {
-        "static": {
-          "props": {
-            "colors": {
-              "primary_color": "#000000",
-              "secondary_color": "#000000",
-              "accent_color": "#000000",
-              "link_color": "#4499FF",
-              "button_secondary_color": "#000000",
-              "bg_color": "#F8F8F8"
-            }
-          }
-        },
-        "custom": {
-          "props": {
-            "header_bg_color": "#7f9ed0",
-            "header_text_color": "#FFFFFF",
-            "header_border_color": "#FFFFFF",
-            "header_icon_color": "#FFFFFF",
-            "header_cart_notification_bg_color": "#2e3032",
-            "header_cart_notification_text_color": "#FFFFFF",
-            "header_nav_hover_color": "#2e3032",
-            "button_primary_color": "#ffffff",
-            "button_primary_label_color": "#000000",
-            "button_add_to_cart_color": "#000000",
-            "button_add_to_cart_label_color": "#ffffff",
-            "button_secondary_color": "#000000",
-            "button_secondary_label_color": "#ffffff",
-            "button_tertiary_color": "#000000",
-            "button_tertiary_label_color": "#000000",
-            "button_tertiary_hover_color": "#000000",
-            "button_tertiary_hover_text_color": "#ffffff",
-            "text_heading_link_color": "#000000",
-            "text_body_color": "#000000",
-            "text_price_color": "#000000",
-            "text_sale_price_color": "#fb406b",
-            "text_strikethrough_price_color": "#9b9b9b",
-            "text_discount_color": "#ee478d",
-            "footer_bg_color": "#7f9ed0",
-            "footer_text_color": "#FFFFFF",
-            "footer_border_color": "#FFFFFF",
-            "footer_nav_hover_color": "#2e3032"
-          }
-        }
-      },
       "page": [
         {
           "settings": {
@@ -651,6 +509,8 @@
     ]
   },
   "information": {
-    "features": ["Responsive"]
+    "features": [
+      "Responsive"
+    ]
   }
 }

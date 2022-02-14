@@ -1,5 +1,7 @@
 <template>
-  <div :class="{
+  <div
+    
+    :class="{
       'section-main-container': !settings.props.full_width.value,
       'full-width-section': settings.props.full_width.value,
     }"
@@ -8,7 +10,7 @@
       <div class="card-container">
         <div class="top-items">
           <div class="title-block">
-            <div
+            <!-- <div
               :style="'color:' + global_config.props.text_heading_link_color"
               class="section-heading"
               v-if="
@@ -25,7 +27,7 @@
               v-if="settings.props.cta_text.value"
               >{{ settings.props.cta_text.value }}</fdk-link
             >
-          </div>
+          </div> -->
           <template v-if="settings.blocks.length > 0">
             <div v-if="settings.props.layout.value === 'grid'">
               <group-list
@@ -43,10 +45,11 @@
                       v-for="(block, index) in settings.blocks"
                       :key="index"
                       >
-                      <gallery-item
+                      <!-- <gallery-item
                         :block="block"
                         class="item"
-                      ></gallery-item>
+                      ></gallery-item> -->
+                      <a v-bind:href="block.props.image_url.value"><img v-bind:src="block.props.image.value"/>
                     </div>
                   </div>
                 </div>
@@ -91,12 +94,12 @@
             />
           </template>
           <div class="view-all-mobile" :class="{ 'view-all-horizontal': settings.props.layout.value === 'horizontal'}">
-            <fdk-link
+            <!-- <fdk-link
               :link="settings.props.cta_link.value"
               class="view-all-text"
               v-if="settings.props.cta_text.value"
               >{{ settings.props.cta_text.value }}</fdk-link
-            >
+            > -->
           </div>
         </div>
       </div>
@@ -107,15 +110,10 @@
 
 <settings>
 {
-    "name": "frequently_asked_questions",
-    "label": "Frequently Asked Questions",
+    "name": "image-container",
+    "label": "Image Container",
     "props": [
-        {
-            "type": "text",
-            "id": "title",
-            "default": "",
-            "label": "Title"
-        },
+       
         {
             "id": "layout",
             "type": "select",
@@ -136,26 +134,13 @@
         {
             "type": "range",
             "id": "item_count",
-            "min": 3,
-            "max": 3,
+            "min": 1,
+            "max": 2,
             "step": 1,
             "unit": "",
             "label": "No of items",
-            "default": 4,
+            "default": 2,
             "info": "Maximum items allowed per row for Horizontal view, for gallery max 5 are viewable and only 5 blocks are required"
-        },
-        {
-            "type": "text",
-            "id": "cta_text",
-            "default": "",
-            "label": "CTA Text"
-        },
-        {
-            "type": "url",
-            "id": "cta_link",
-            "label": "CTA Link",
-            "default": "",
-            "info": "Link to redirect"
         },
         {
             "type": "checkbox",
@@ -165,42 +150,81 @@
             "info": "Check to allow items to take entire width of the viewport"
         }
     ],
-    "blocks": [
+   "blocks": [
         {
-            "type": "gallery_image",
-            "name": "Image",
+            "type": "image-container",
+            "name": "Image Container",
             "props": [
+                
                 {
                     "type": "image_picker",
                     "id": "image",
-                    "label": "Gallery Image",
-                    "default": ""
+                    "default": "",
+                    "label": "Product Image"
+                },
+                {
+                    "type": "url",
+                    "id": "image_url",
+                    "default": "",
+                    "label": "Redirect Link"
+                },
+
+                {
+                    "type": "text",
+                    "id": "heading_1",
+                    "default": "This is Heading 1",
+                    "label": "Heading1"
+                },
+                
+                {
+                    "type": "text",
+                    "id": "heading_2",
+                    "default": "This is heading 2",
+                    "label": "Heading2"
+                },
+                
+                {
+                    "type": "text",
+                    "id": "heading_3",
+                    "default": "This is Heading 3",
+                    "label": "Heading3"
                 },
                 {
                     "type": "text",
-                    "id": "title",
-                    "label": "Title",
-                    "default": ""
+                    "id": "button_1",
+                    "default": "Shop This",
+                    "label": "Button Text"
                 },
                 {
-                    "type": "textarea",
-                    "id": "description",
-                    "label": "Description",
-                    "default": ""
+                    "type": "url",
+                    "id": "button_1_link",
+                    "default": "",
+                    "label": "Redirect Link"
+                },
+                {
+                    "type": "text",
+                    "id": "button_2",
+                    "default": "Shop All",
+                    "label": "Button Text"
+                },
+                 {
+                    "type": "url",
+                    "id": "button_2_link",
+                    "default": "",
+                    "label": "Redirect Link"
                 }
+
+               
             ]
         }
     ],
-    "preset":{
+ "preset":{
       "blocks":[
         {
-          "name":"lllll"
+          "name":"Image Container"
         },
         {
-          "name":"jjjjj"
-        },
-        {
-          "name":"mmmmm"
+          "name":"Image Container"
         }
       ]
     }
@@ -208,9 +232,7 @@
 </settings>
 <!-- #endregion -->
 <style scoped lang="less">
-.section-main-container{
-   background-color:white !important;
-}
+
 .gallery-container {
   // margin: 20px 0px 30px 0px;
   @media @mobile {
@@ -348,11 +370,6 @@
     background-image: url(../assets/images/nav-arrow.svg);
   }
   
-}
-.faq{
-  text-align: center;
-  font-size: 38px;
-  font-family: "Century Gothic";
 }
 </style>
 <script>

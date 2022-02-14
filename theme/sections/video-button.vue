@@ -38,11 +38,9 @@
         :data-videometa="JSON.stringify(settings.props)"
         allowfullscreen
       ></div>
-       <div class="content" v-if="settings.props">
-          <h1 id="title">{{settings.props.title.value}}</h1>
-          <strong id="studio_name">{{settings.props.sub_title.value}}</strong>
-          <p class="description">{{settings.props.description.value}}</p>
-      </div>
+        <div  v-if="settings.props">
+            <a v-bind:href="settings.props.button_link " type="button" class="shopButton">{{settings.props.button_name.value}}</a>
+        </div>
       
       <!-- <fdk-placeholder v-else type="banner-2" /> -->
       <div class="close-video-box" @click="closeVideo">
@@ -136,8 +134,8 @@
 <!-- #region  -->
 <settings>
 {
-  "name": "hero_video",
-  "label": "Hero Video",
+  "name": "video_button",
+  "label": "Video Button",
   "props": [
     {
       "id": "video_url",
@@ -232,24 +230,16 @@
       "label": "Full width",
       "info":"Check to allow items to take entire width of the viewport"
     },
-     {
-      "type":"text",
-      "id": "title",
-      "label": "Title",
-      "default": "This is the Title Field"
-      },
-      {
+    {
         "type": "text",
-        "id": "sub_title",
-        "label": "Sub Title",
-        "default": "This is the sub title Field"
-
+        "id": "button_name",
+        "label": "Button Name",
+        "default": "Shop Now"
       },
       {
-        "type": "textarea",
-        "id": "description",
-        "label": "Description",
-        "default": "This is the Description"
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
       }
   ]
   
