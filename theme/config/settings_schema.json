@@ -233,6 +233,16 @@
       "default": false,
       "category": "Cart",
       "label": "Disable Cart"
+    },
+    {
+      "type": "font-family",
+      "id": "HeaderPrimaryFont",
+      "default": "Linotype Didot"
+    },
+    {
+      "type": "font-size",
+      "id": "HeaderFontSize",
+      "default": "38px"
     }
   ]
 }

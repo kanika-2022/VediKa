@@ -1,11 +1,19 @@
 <template>
-  <div class="plp-wrapper" :style="global_config ? 'color:' + global_config.props.text_body_color : ''">
+  
+  <div
+    class="plp-wrapper"
+    :style="global_config ? 'color:' + global_config.props.text_body_color : ''"
+  >
+   <sections page="product-listing"/>
+    <!-- <h1> This is a new Section </h1> -->
     <fdk-loader
-          class="loader-ws"
-                    v-if="context.loading && (!context.items || context.items.length === 0)"
+      class="loader-ws"
+      v-if="context.loading && (!context.items || context.items.length === 0)"
     ></fdk-loader>
     <div
-      v-else-if="!context.loading && (!context.items || context.items.length === 0)"
+      v-else-if="
+        !context.loading && (!context.items || context.items.length === 0)
+      "
     >
       <fdk-empty-state :title="'No items found'"></fdk-empty-state>
     </div>
@@ -13,8 +21,8 @@
       <fdk-empty-state :title="'Something went wrong'"></fdk-empty-state>
     </div>
     <template v-else-if="context && context.items">
-      <div class="mobile-header mobile" >
-        <div class="m-header" >
+      <div class="mobile-header mobile">
+        <div class="m-header">
           <div class="m-action-container" ref="mobileActionContainer">
             <div
               class="m-action-child-container"
@@ -44,7 +52,7 @@
               </div>
             </div>
             <span class="text-seperator cl-DoveGray line">|</span>
-            <fdk-share class="m-action-child-container mobile" >
+            <fdk-share class="m-action-child-container mobile">
               <template slot-scope="share">
                 <!-- SHARE ICON -->
                 <div @click="getShareLink(share)" class="share-mobile-button">
@@ -52,7 +60,10 @@
                     :src="'share'"
                     class="share-mobile-img"
                   ></fdk-inline-svg> -->
-                  <img src="../../assets/images/share.svg" class="share-mobile-img"/>
+                  <img
+                    src="../../assets/images/share.svg"
+                    class="share-mobile-img"
+                  />
                   <div class="regular-xxxs cl-DoveGray">
                     <span class="text-seperator"></span>
                     SHARE
@@ -67,14 +78,17 @@
         <div class="header">
           <div class="m-action-container">
             <fdk-share class="m-action-child-container desktop">
-              <template slot-scope="share">
+              <!-- <template slot-scope="share"> -->
                 <!-- SHARE ICON -->
-                <div @click="getShareLink(share)" class="share-mobile-button">
+                <!-- <div @click="getShareLink(share)" class="share-mobile-button"> -->
                   <!-- <fdk-inline-svg
                     :src="'share'"
                     class="share-mobile-img"
                   ></fdk-inline-svg> -->
-                  <img src="../../assets/images/share.svg" class="share-mobile-img"/>
+                  <!-- <img
+                    src="../../assets/images/share.svg"
+                    class="share-mobile-img"
+                  />
                   <transition name="fade desktop">
                     <share
                       :title="
@@ -94,13 +108,14 @@
                     Share
                   </div>
                 </div>
-              </template>
+              </template> -->
             </fdk-share>
-            <span class="text-seperator cl-DoveGray line">|</span>
-            <div
-              class="m-action-child-container"
-            >
-                <sort-dd :filteredsorts="context.sort_on" :updateSelection="updateSelection"/>
+            <!-- <span class="text-seperator cl-DoveGray line">|</span> -->
+            <div class="m-action-child-container">
+              <sort-dd
+                :filteredsorts="context.sort_on"
+                :updateSelection="updateSelection"
+              />
             </div>
           </div>
         </div>
@@ -188,7 +203,7 @@
                             <div
                               class="filter-item-count light-xxxs cl-DoveGray"
                             >
-                              ({{ filterItem.count }})
+                              ({{ filterItem.count || 0 }})
                             </div>
                           </div>
                         </fdk-link>
@@ -223,7 +238,7 @@
                             <div
                               class="filter-item-count light-xxxs cl-DoveGray"
                             >
-                              ({{ filterItem.count }})
+                              ({{ filterItem.count || 0 }}) 
                             </div>
                           </div>
                         </fdk-link>
@@ -484,7 +499,9 @@
                     v-for="(product, index) in getProducts"
                     :key="index + '-product.uid'"
                   >
-                    <div @click="redirectToProduct(product.url)" class="product-wrapper">
+                    <div
+                      @click="redirectToProduct(product.url)" class="product-wrapper"
+                    >
                       <fy-product-card
                         :product="product"
                         :context="context"
@@ -542,7 +559,11 @@
       </transition>
       <!-- FILTER MODAL -->
       <div class="mobile share-wrap">
-        <transition name="fade" :data-ss="String(showShare)" :data-ismobile="String(isMobile)">
+        <transition
+          name="fade"
+          :data-ss="String(showShare)"
+          :data-ismobile="String(isMobile)"
+        >
           <share
             :title="
               `Spread the shopping delight! Scan QR & share this products with
@@ -570,7 +591,7 @@ import sliderfilter from "./../../global/components/fy-slider-filter.vue";
 import share from "./../../global/components/share.vue";
 import { detectMobileWidth } from "./../../helper/utils";
 import { isBrowser, isNode } from "browser-or-node";
-import sortDD from './../../global/components/plp/sort-dd'
+import sortDD from "./../../global/components/plp/sort-dd";
 
 export default {
   name: "fdk-plp",
@@ -639,20 +660,29 @@ export default {
   },
   mounted() {
     this.isMobile = detectMobileWidth();
-   
     // this.isMounted = true;
   },
   methods: {
-    
     hideShare() {
       this.showShare = false;
+    },
+    redirectToProduct: function redirectToProduct(productUrl) {
+      if(this.isLoadedInIframe()) {
+        this.$router.push(productUrl);
+        return;
+      }
+      if (!this.isMobile) {
+        let routeData = this.$router.resolve(productUrl);
+        window.open(routeData.href, "_blank");
+      } else {
+        this.$router.push(productUrl);
+      }
     },
     getShareLink(share) {
       this.shareLoading = true;
       this.showShare = true;
       share.getShareLink(window.location.href).then((res) => {
         share.generateQRCode(res).then(( data ) => {
-         
           this.qr_code = `
                 <div style="width: 250px;">
                   ${data.svg}
@@ -756,7 +786,6 @@ export default {
       }
     },
     viewModal: function viewModal(event, type) {
-     
       if (type === "sort") {
         this.showSortByModal = true;
       } else if (type === "filter") {
@@ -784,20 +813,8 @@ export default {
       const placeHolder = this.$refs[`placeholder-${id}`];
       placeHolder[0].style.display = "none";
     },
-    redirectToProduct: function redirectToProduct(productUrl) {
-      if(this.isLoadedInIframe()) {
-        this.$router.push(productUrl);
-        return;
-      }
-      if (!this.isMobile) {
-        let routeData = this.$router.resolve(productUrl);
-        window.open(routeData.href, "_blank");
-      } else {
-        this.$router.push(productUrl);
-      }
-    },
     isLoadedInIframe() {
-      if (isBrowser && (window.location !== window.parent.location)) {
+      if (isBrowser && window.location !== window.parent.location) {
         return true;
       } else {
         return false;
@@ -842,17 +859,20 @@ export default {
       });
     },
     hrefTarget() {
-      return this.isLoadedInIframe() ? "_self" : "_blank";
+       return detectMobileWidth() ? "_self" : "_blank";
     },
     listingPriceConfig() {
-      return this.context.app_features?.feature?.common?.listing_price?.value
-    }
+      return this.context.app_features?.feature?.common?.listing_price?.value;
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
+.content{
+  background-color: white !important;
 
+}
 .plp-container {
   @media @tablet {
     margin: 20px 0 0 0;
@@ -972,8 +992,9 @@ export default {
   // margin-right:14px;
   // box-shadow:0 0 15px rgba(0,0,0,.12);
   // border-radius:8px;
-  background-color:#ffffff;
+  background-color: #ffffff;
   // margin-left:-10px;
+  padding: 0px 100px;
 }
 .product-container {
   display: grid;
@@ -984,7 +1005,6 @@ export default {
 }
 
 .product-wrapper {
-  border: 1px solid #e4e5e6;
   border-radius: 3px;
   box-sizing: border-box;
   height: 100%;
@@ -1003,7 +1023,7 @@ export default {
     line-height: 2em;
     position: fixed;
     z-index: 2;
-    top: 73px;
+    top: 68px;
     // border-top: 1px solid #f8f8f8;
   }
   .m-title {
@@ -1041,7 +1061,6 @@ export default {
       }
     }
   }
-
 }
 
 .desktop-header {
@@ -1091,7 +1110,6 @@ export default {
       }
     }
   }
-
 }
 
 .cl-DoveGray {
@@ -1119,7 +1137,7 @@ export default {
 
 .filter-item-value {
   text-transform: capitalize;
-  font-size:13px;
+  font-size: 13px;
 }
 
 .filter-title {
@@ -1131,7 +1149,7 @@ export default {
   padding: 8px 0;
   cursor: pointer;
 }
-.fil_tit{
+.fil_tit {
   // font-weight:bold !important;
   // font-size:13px !important;
 }
@@ -1252,7 +1270,7 @@ export default {
 }
 .inline-svg {
   margin-bottom: 0px;
-  margin-right:4px;
+  margin-right: 4px;
 }
 
 .rightPane {
@@ -1391,7 +1409,6 @@ export default {
   }
   .inline-svg {
     margin-bottom: 0;
-    
   }
 }
 
@@ -1441,7 +1458,6 @@ export default {
   cursor: pointer;
 }
 .active-filters-container {
-  
   font-size: 12px;
   display: flex;
   flex-wrap: wrap;
@@ -1491,12 +1507,14 @@ export default {
   width: 35px;
 }
 
-.product-count{
-  font-size:18px;
-  font-weight:700;
+.product-count {
+  font-size: 18px;
+  font-weight: 700;
 }
 
-.dark-sm{
-  font-size:12px;
+.dark-sm {
+  font-size: 12px;
 }
+
+
 </style>

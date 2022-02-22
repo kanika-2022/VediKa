@@ -1,23 +1,21 @@
 <template>
-  <div
-    :class="{
-      'section-main-container': !settings.props.full_width.value,
-      'full-width-section': settings.props.full_width.value,
-    }"
+  <div class="section-main-container" style="max-width:100%; padding: 50px 0px;
+    background-color: white;"
     v-if="render"
   >
     <div class="video-container" :class="settings.props.size.value">
       <video
         ref="mp4video"
         width="100%"
+        autoplay="autoplay"
         :poster="settings.props.cover_url.value"
-        :autoplay="settings.props.autoplay.value"
         preload="auto"
         :controls="true"
         v-if="
           settings.props.video_url.value &&
             isMp4(settings.props.video_url.value)
         "
+        
       >
         <source
           :src="settings.props.video_url.value"
@@ -43,7 +41,7 @@
         </div>
       
       <!-- <fdk-placeholder v-else type="banner-2" /> -->
-      <div class="close-video-box" @click="closeVideo">
+      <!-- <div class="close-video-box" @click="closeVideo">
         <svg
           version="1.1"
           id="Layer_1"
@@ -62,7 +60,7 @@
           />
         </svg>
 
-      </div>
+      </div> -->
      
       <!-- <div
         class="overlay animated fadeIn"
@@ -222,14 +220,6 @@
         "label": "Overlay position",
         "info": "Alignment of Overlay content(heading, sub-heading, button)"
     },
-  
-    {
-      "type":"checkbox",
-      "id":"full_width",
-      "default": false,
-      "label": "Full width",
-      "info":"Check to allow items to take entire width of the viewport"
-    },
     {
         "type": "text",
         "id": "button_name",
@@ -267,8 +257,10 @@
     }
   }
   &.large {
-    height: 750px;
-    width: 100%;
+    // height: 750px;
+    width: 100% !important;
+    object-fit: cover !important;
+    left: 0px !important;
     @media @tablet {
       height: 230px;
     }
@@ -427,34 +419,28 @@
     }
   }
 }
-.content{
-    position: absolute;
-    top: 200px;
-    left: 100px;
-    background: #fff;
-    max-width: 30%;
-    width: 30%;
-    padding: 20px 20px;
-    text-align: center;
-    color: #000;
-    /* line-height: 1; */
-    text-align: left;
-    line-height: 2;
-    font-family: "Century Gothic";
-}
 .shopButton{
   position: absolute;
-  background: white;
-  padding: 15px 15px;
+  background: #fff;
+  padding: 15px 50px;
   text-align: center;
-  color: black;
-  top: 400px;
+  color: #000;
+  top: 600px;
   right: 100px;
   font-size: 16px;
-  border: 2px solid white;
+  border: 2px solid #fff;
   background: transparent;
-  color: white;
+  color: #fff;
   cursor: pointer;
+}
+.ytp-chrome-bottom{
+  display:none !important;
+}
+.ytp-chrome-top{
+  display:none !important;
+}
+.video-stream{
+  width: 100% 
 }
 </style>
 

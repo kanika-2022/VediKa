@@ -27,6 +27,12 @@
         </div>
 
         <div class="product-image">
+          <div id="sale">SALE </div>
+          <div class="out-of-stock-container" v-if="!product.sellable">
+              <div class="out-of-stock">
+                <div class="out-of-stock-text bold-xxxxs">SOLD OUT</div>
+              </div>
+            </div>
           <emerge-image
             :src="imageUrl"
             :alt="product.brand.name + ' | ' + product.name"
@@ -49,11 +55,7 @@
           </div>
         </div>
       </div>
-      <div class="out-of-stock-container" v-if="!product.sellable">
-        <div class="out-of-stock">
-          <div class="out-of-stock-text bold-xxxxs">SOLD OUT</div>
-        </div>
-      </div>
+      
       <div class="product-desc">
         <!-- Product Rating -->
         <div style="height: 20px" v-if="product.rating">
@@ -393,6 +395,10 @@ export default {
   white-space: nowrap;
   padding: 5px 10px 5px 10px;
   box-sizing: border-box;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Century Gothic";
+  line-height: 1.5;
   .ukt-title {
     font-weight: bold;
     // color: #41434C;
@@ -407,7 +413,7 @@ export default {
     box-sizing: border-box;
   }
   .price {
-    text-align: left;
+    // text-align: left;
     padding: 5px 0;
   }
 }
@@ -426,5 +432,12 @@ export default {
 
 .strike-through {
   text-decoration: line-through;
+}
+#sale{
+    position: absolute;
+    background: red;
+    padding: 5px 20px;
+    color: white;
+    right: 0px;
 }
 </style>

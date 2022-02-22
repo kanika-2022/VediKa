@@ -1,8 +1,11 @@
 <template>
+  
   <div
     class="plp-wrapper"
     :style="global_config ? 'color:' + global_config.props.text_body_color : ''"
   >
+   <sections page="product-listing"/>
+    <h1> This is a new Section </h1>
     <fdk-loader
       class="loader-ws"
       v-if="context.loading && (!context.items || context.items.length === 0)"
@@ -75,14 +78,14 @@
         <div class="header">
           <div class="m-action-container">
             <fdk-share class="m-action-child-container desktop">
-              <template slot-scope="share">
+              <!-- <template slot-scope="share"> -->
                 <!-- SHARE ICON -->
-                <div @click="getShareLink(share)" class="share-mobile-button">
+                <!-- <div @click="getShareLink(share)" class="share-mobile-button"> -->
                   <!-- <fdk-inline-svg
                     :src="'share'"
                     class="share-mobile-img"
                   ></fdk-inline-svg> -->
-                  <img
+                  <!-- <img
                     src="../../assets/images/share.svg"
                     class="share-mobile-img"
                   />
@@ -105,9 +108,9 @@
                     Share
                   </div>
                 </div>
-              </template>
+              </template> -->
             </fdk-share>
-            <span class="text-seperator cl-DoveGray line">|</span>
+            <!-- <span class="text-seperator cl-DoveGray line">|</span> -->
             <div class="m-action-child-container">
               <sort-dd
                 :filteredsorts="context.sort_on"
@@ -866,6 +869,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 .plp-container {
   @media @tablet {
     margin: 20px 0 0 0;
@@ -1508,4 +1512,6 @@ export default {
 .dark-sm {
   font-size: 12px;
 }
+
+
 </style>

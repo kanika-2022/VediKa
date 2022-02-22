@@ -1,19 +1,23 @@
-<template>
+f<template>
   <div
-    class="testimonial-cont section-main-container"
+    class="testimonial-cont section-main-container" style="margin:10px !important; max-width:100% !important"
   >
+  <div
+  :style="'color:' + global_config.props.text_heading_link_color"
+  class="section-heading">
+    {{ settings.props.title.value }}
+  </div>
     <div class="glide-cont" :class="'glide'+ _uid" ref="glide" >
       <div data-glide-el="track" class="glide__track">
         <div class="glide__slides" :class="{ 'ssr-slides-box': !checkisBrowser() && !isMounted }">
-          <div class="glide__slide quotes-slider" v-for="(block, i) in blocks" :key="i" >
-              <div class="author-image">
-                <emerge-image v-if="block.props && block.props.author_image.value" :src="block.props.author_image.value" 
-                  :sources="[ {width: 98}]"
-                />
-              </div>
+          <div class="glide__slide quotes-slider" v-for="(block, i) in blocks" :key="i" style="width:500px;">
+             
               <div class="testimonial">
                 <span class="quote-icon left">
-                  <img src="../assets/images/double-quote.svg" />
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-quote" viewBox="0 0 41 35">
+                    <path d="M10.208 17.711h6.124v16.332H0V21.684C0 8.184 5.444.956 16.332 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766zm24.498 0h6.124v16.332H24.498V21.684C24.498 8.184 29.942.956 40.83 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766z" fill="#000" fill-rule="evenodd">
+                    </path>
+                  </svg>
                 </span>
                 <p>
                   {{ block.props && block.props.testimonialText.value
@@ -21,17 +25,24 @@
                     : 'Add customer reviews and testimonials to showcase your store’s happy customers.'
                   }}
                 </p>
-                <span class="quote-icon right">
-                  <img src="../assets/images/double-quote.svg" />
-                </span>
+              
               </div>
               
-              <cite> 
+              <cite style="margin: 20px 0px; !important"> 
                 <section> 
-                  <div>{{ block.props && block.props.author_name.value ? block.props.author_name.value : "Author's name"}}</div>
+                  <div><b>{{ block.props && block.props.author_name.value ? block.props.author_name.value : "Author's name"}}</b></div>
                   <div>{{ block.props && block.props.author_description.value ? block.props.author_description.value : "Author's Description" }}</div>
                 </section>
               </cite>
+               
+               <div class="author-image">
+                  <img
+                      style="max-width: 25%;height:100%"
+                      v-if="block.props && block.props.author_image.value"
+                      :src="block.props.author_image.value" 
+                      alt=""
+                  />
+              </div>
             
           </div>
         </div>
@@ -46,7 +57,7 @@
           blocks.length > 1
         "
       >
-        <section>
+        <!-- <section>
           <div
             class="prev-btn btn-nav-testimonial"
             ref="prevArrow"
@@ -63,7 +74,7 @@
             <div class="icon icon-next">
             </div>
           </div>
-        </section>
+        </section> -->
       </div>
     </div>
     
@@ -75,6 +86,11 @@
     "name": "testimonials",
     "label": "Testimonial",
     "props": [
+        {
+            "type": "text",
+            "id": "title",
+            "label":"Title"
+        },
         {
             "type": "checkbox",
             "id": "autoplay",
@@ -90,6 +106,17 @@
             "unit": "sec",
             "label": "Change slides every",
             "default": 2
+        },
+          {
+            "type": "range",
+            "id": "item_count",
+            "min": 3,
+            "max": 3,
+            "step": 1,
+            "unit": "",
+            "label": "No of items",
+            "default": 3,
+            "info": "Maximum items allowed per row for Horizontal view, for gallery max 3 are viewable and only 3 blocks are required"
         }
     ],
     "blocks": [
@@ -144,6 +171,9 @@
 
 <!-- #endregion -->
 <style scoped lang="less">
+.testimonial-cont{
+  padding: 30px;
+}
 .testimonial-cont {
   .glide__bullets {
     position: relative;
@@ -227,8 +257,8 @@
   
   .icon {
     display: inline-block;
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     background-size: cover;
   }
   .icon-next {
@@ -272,26 +302,26 @@
   // }
   .quotes-slider p {
     // margin-bottom: 30px;
-    line-height: 52px;
-    font-size: 30px;
-    font-weight: lighter;
-    font-style: italic;
-    padding: 0 80px;
+    font-size: 16px;
+    line-height: 1.6em;
+    font-family: "Century Gothic";
     @media @tablet {
-      line-height: 42px;
-      font-size: 25px;
-      padding: 0 20px;
+      font-size: 16px;
+      line-height: 1.6em;
+      font-family: "Century Gothic";
     }
     @media @mobile {
-      line-height: 36px;
       font-size: 16px;
+      line-height: 1.6em;
+      font-family: "Century Gothic";
     }
   }
   .author-image {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100px;
+    // height: 100px;
+    margin-bottom: 30px;
     /deep/ .fy__img {
       border-radius: 50%;
       height: 98px;
@@ -299,14 +329,19 @@
   }
   .quote-icon {
     display: flex;
-    align-items: center;
+    // align-items: center;
+    justify-content: center;
     &.left {
       margin: 20px 0 0px 0;
-      justify-content: flex-start;
+      // justify-content: flex-start;
+      justify-content: center;
+
     }
     &.right {
       margin: 0px 0 20px 0;
-      justify-content: flex-end;
+      // justify-content: flex-end;
+      justify-content: center;
+
       img {
         transform: rotate(180deg);
       }
@@ -315,15 +350,25 @@
   }
   .testimonial {
     height: 100%;
-    padding: 0 30px;
+    padding: 10px 10px;
     width: 80%;
     margin: 0 auto;
     box-sizing: border-box;
     @media @tablet {
-      padding: 0 20px;
+      padding: 10px 10px;
       width: 100%;
     }
   }
+}
+.glide__slide.quotes-slider.glide__slide--active {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px #0000001a;
+    position: relative;
+    z-index: 10;
+    transition: all linear 0.3s;
+}
+.testimonial-cont .quotes-slider{
+  background-color: #fff;
 }
 </style>
 <script>
@@ -335,7 +380,7 @@ import "../../node_modules/@glidejs/glide/dist/css/glide.core.min.css";
 import "../../node_modules/@glidejs/glide/dist/css/glide.theme.min.css";
 
 export default {
-  props: ["settings"],
+  props: ["settings","global_config"],
   components: {
     "emerge-image": emergeImage,
   },
@@ -357,9 +402,21 @@ export default {
       isMounted: false,
       glideOptions: {
           type: 'carousel',
-          startAt: 0,
-          gap: 0,
-          perView: 1
+          startAt: 1,
+          gap: 10,
+          focusAt : 'center',
+          perView: this.settings.props.item_count.value,
+          breakpoints: {
+            1024: {
+              perView: 3
+            },
+            600: {
+              perView: 2
+            },
+            480: {
+              perView: 1
+            }
+          }
       },
       carouselHandle: null
     };

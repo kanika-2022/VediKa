@@ -188,10 +188,6 @@
             {
               "value": "grid",
               "text" : "Grid View"
-            },
-            {
-              "value": "horizontal",
-              "text" : "Horizontal View"
             }
           ],
           "default": "horizontal",

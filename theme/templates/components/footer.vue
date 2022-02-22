@@ -12,6 +12,33 @@
           {{ context.description }}
         </p>
       </div>
+      <div class="grid__item footer__item--158fcb94-3842-4595-8844-9f971c660134" data-type="custom"><style data-shopify="">@media only screen and (min-width: 769px) and (max-width: 959px) {
+              .footer__item--158fcb94-3842-4595-8844-9f971c660134 {
+                width: 50%;
+                padding-top: 40px;
+              }
+              .footer__item--158fcb94-3842-4595-8844-9f971c660134:nth-child(2n + 1) {
+                clear: left;
+              }
+            }
+            @media only screen and (min-width: 960px) {
+              .footer__item--158fcb94-3842-4595-8844-9f971c660134 {
+                width: 28%;
+              }
+              
+            }</style><div class="footer__item-padding"><p class="h4 footer__title small--hide">Payment's Accepted</p>
+    <div id="Footer-158fcb94-3842-4595-8844-9f971c660134" class="collapsible-content collapsible-content--small">
+    <div class="collapsible-content__inner">
+      <div class="footer__collapsible"><div class="image-wrap text-spacing" style="height: 0; padding-bottom: 39.53125%;"><img class="lazyautosizes lazyloaded" data-widths="[360, 540, 720, 900, 1080, 1600]" data-aspectratio="2.5296442687747036" data-sizes="auto" role="presentation" alt="" data-srcset="//cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_360x.jpg?v=1630319405 360w, //cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_540x.jpg?v=1630319405 540w, //cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_720x.jpg?v=1630319405 720w, //cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_900x.jpg?v=1630319405 900w, //cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_1080x.jpg?v=1630319405 1080w, //cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_1600x.jpg?v=1630319405 1600w" sizes="240px" srcset="//cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_360x.jpg?v=1630319405 360w, //cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_540x.jpg?v=1630319405 540w, //cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_720x.jpg?v=1630319405 720w, //cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_900x.jpg?v=1630319405 900w, //cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_1080x.jpg?v=1630319405 1080w, //cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_1600x.jpg?v=1630319405 1600w">
+            <noscript>
+              <img class="lazyloaded" src="//cdn.shopify.com/s/files/1/2529/7758/files/WhatsApp_Image_2021-08-30_at_3.59.30_PM_400x.jpg?v=1630319405" alt="">
+            </noscript>
+          </div><p>{{ context.app_info.copyright_text }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
       <div class="item-block">
         <div
           class="link-block"
@@ -37,8 +64,21 @@
         </div>
       </div>
       <div class="social-link-block">
-        <h5 class="footer-head">GET IN TOUCH</h5>
+        <h5 class="footer-head">SIGN UP AND SAVE</h5>
+        <p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
         <div class="flat">
+        <form method="post" action="/contact#newsletter-footer" id="newsletter-footer" accept-charset="UTF-8" class="contact-form"><input type="hidden" name="form_type" value="customer"><input type="hidden" name="utf8" value="✓"><label for="Email-1494292487693" class="hidden-label">Enter your email</label>
+          <input type="hidden" name="contact[tags]" value="prospect,newsletter">
+          <input type="hidden" name="contact[context]" value="footer">
+          <div class="footer__newsletter">
+            <input type="email" value="" placeholder="Enter your email" name="contact[email]" id="Email-1494292487693" class="footer__newsletter-input" autocorrect="off" autocapitalize="off">
+            <button type="submit" class="footer__newsletter-btn" name="commit" aria-label="Subscribe">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-email" viewBox="0 0 64 64"><path d="M63 52H1V12h62zM1 12l25.68 24h9.72L63 12M21.82 31.68L1.56 51.16m60.78.78L41.27 31.68"></path></svg>              <span class="footer__newsletter-btn-label">
+                Subscribe
+              </span>
+            </button>
+          </div></form>
+          <!--
           <ul
             class="list"
             v-if="
@@ -48,6 +88,7 @@
           >
             <li>Email: {{ context.support.contact.email.email[0].value }}</li>
           </ul>
+          
           <ul
             class="list"
             v-if="
@@ -56,7 +97,7 @@
             "
           >
             <li>Call : {{ context.support.contact.phone.phone[0].number }}</li>
-          </ul>
+          </ul> -->
           <ul class="row">
             <li
               v-for="(item, index) in context &&
@@ -74,10 +115,10 @@
         </div>
       </div>
     </div>
-    <div class="sub-footer_bottom">
+    <!-- <div class="sub-footer_bottom">
       <div>{{ context.app_info.copyright_text }}</div>
       <div></div>
-    </div>
+    </div> -->
   </div>
 </template>
 

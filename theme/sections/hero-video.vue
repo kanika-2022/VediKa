@@ -1,19 +1,16 @@
 <template>
-  <div
-    :class="{
-      'section-main-container': !settings.props.full_width.value,
-      'full-width-section': settings.props.full_width.value,
-    }"
+  <div class="section-main-container" style="max-width:100%; padding: 50px 0px;
+    background-color: white;"
     v-if="render"
   >
     <div class="video-container" :class="settings.props.size.value">
       <video
         ref="mp4video"
         width="100%"
+        autoplay="autoplay"
         :poster="settings.props.cover_url.value"
-        :autoplay="settings.props.autoplay.value"
         preload="auto"
-        :controls="true"
+        :controls="false"
         v-if="
           settings.props.video_url.value &&
             isMp4(settings.props.video_url.value)
@@ -38,14 +35,16 @@
         :data-videometa="JSON.stringify(settings.props)"
         allowfullscreen
       ></div>
-       <div class="content" v-if="settings.props">
+       <div class="content" :class="settings.props.overlay_position.value" v-if="settings.props.title.value || settings.props.sub_title.value || settings.props.description.value">
           <h1 id="title">{{settings.props.title.value}}</h1>
           <strong id="studio_name">{{settings.props.sub_title.value}}</strong>
           <p class="description">{{settings.props.description.value}}</p>
       </div>
-      
+       <div v-if="settings.props.button_name.value || settings.props.button_link.value">
+            <a v-bind:href="settings.props.button_link " type="button" class="shopButton">{{settings.props.button_name.value}}</a>
+        </div>
       <!-- <fdk-placeholder v-else type="banner-2" /> -->
-      <div class="close-video-box" @click="closeVideo">
+      <!-- <div class="close-video-box" @click="closeVideo">
         <svg
           version="1.1"
           id="Layer_1"
@@ -64,7 +63,7 @@
           />
         </svg>
 
-      </div>
+      </div> -->
      
       <!-- <div
         class="overlay animated fadeIn"
@@ -224,33 +223,36 @@
         "label": "Overlay position",
         "info": "Alignment of Overlay content(heading, sub-heading, button)"
     },
-  
     {
-      "type":"checkbox",
-      "id":"full_width",
-      "default": false,
-      "label": "Full width",
-      "info":"Check to allow items to take entire width of the viewport"
+    "type":"text",
+    "id": "title",
+    "label": "Title",
+    "default": "This is the Title Field"
     },
-     {
-      "type":"text",
-      "id": "title",
-      "label": "Title",
-      "default": "This is the Title Field"
-      },
-      {
-        "type": "text",
-        "id": "sub_title",
-        "label": "Sub Title",
-        "default": "This is the sub title Field"
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title",
+      "default": "This is the sub title Field"
 
-      },
-      {
-        "type": "textarea",
-        "id": "description",
-        "label": "Description",
-        "default": "This is the Description"
-      }
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "This is the Description"
+    },
+    {
+      "type": "text",
+      "id": "button_name",
+      "label": "Button Name",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
   ]
   
 }
@@ -277,8 +279,10 @@
     }
   }
   &.large {
-    height: 750px;
-    width: 100%;
+    // height: 750px;
+    width: 100% !important;
+    object-fit: cover !important;
+    left: 0px !important;
     @media @tablet {
       height: 230px;
     }
@@ -337,7 +341,7 @@
       }
     }
     &.top-center {
-      top: 15%;
+      top: 30%;
       text-align: center;
       @media @tablet {
         .center-overlay();
@@ -361,8 +365,8 @@
       }
     }
     &.center-center {
-      top: unset;
-      bottom: unset;
+      top: 50%;
+      bottom: 50%;
       text-align: center;
       .center-overlay();
     }
@@ -437,33 +441,138 @@
     }
   }
 }
-.content{
+.content {
     position: absolute;
-    top: 200px;
-    left: 100px;
+    // top: 200px;
+    // left: 100px;
     background: #fff;
     max-width: 30%;
     width: 30%;
     padding: 20px 20px;
-    text-align: center;
     color: #000;
     /* line-height: 1; */
     text-align: left;
     line-height: 2;
     font-family: "Century Gothic";
+    min-height: 100px;
+
+    &.top-left {
+      top: 15%;
+      left: @header-padding-desktop;
+      text-align: left;
+      align-items: flex-start;
+      @media @tablet {
+        .center-overlay();
+      }
+    }
+    &.top-center {
+      top: 30%;
+      left:10%;
+      @media @tablet {
+        .center-overlay();
+      }
+    }
+    &.top-right {
+      top: 15%;
+      right: @header-padding-desktop;
+      text-align: right;
+      align-items: flex-end;
+      @media @tablet {
+        .center-overlay();
+      }
+    }
+    &.center-left {
+      left: @header-padding-desktop;
+      text-align: left;
+      align-items: flex-start;
+      @media @tablet {
+        .center-overlay();
+      }
+    }
+    &.center-center {
+      top: 50%;
+      bottom: 40%;
+      text-align: center;
+      .center-overlay();
+    }
+    &.center-right {
+      top: unset;
+      right: @header-padding-desktop;
+      text-align: right;
+      align-items: flex-end;
+      @media @tablet {
+        .center-overlay();
+      }
+    }
+    &.bottom-left {
+      bottom: 10%;
+      left: @header-padding-desktop;
+      text-align: left;
+      align-items: flex-start;
+      @media @tablet {
+        .center-overlay();
+      }
+    }
+    &.bottom-right {
+      bottom: 10%;
+      right: @header-padding-desktop;
+      text-align: right;
+      align-items: flex-end;
+      @media @tablet {
+        .center-overlay();
+      }
+    }
+    &.bottom-center {
+      bottom: 10%;
+      text-align: center;
+      @media @tablet {
+        .center-overlay();
+      }
+    }
+  }
+  &__text {
+    // text-align: center;
+    margin-bottom: 16px;
+    h2 {
+      font-size: 30px;
+      line-height: 31px;
+      font-weight: 400;
+      @media @mobile {
+        font-size: 16px;
+      }
+      margin-bottom: 16px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 24px;
+
+      @media @mobile {
+        font-size: 12px;
+      }
+    }
+  }
+#studio_name{
+  font-size: 25px;
+  font-weight: 800;
+}
+.ytp-chrome-bottom{
+  display:none !important;
+}
+.ytp-chrome-top{
+  display:none !important;
 }
 .shopButton{
   position: absolute;
-  background: white;
-  padding: 15px 15px;
+  background: #fff;
+  padding: 15px 50px;
   text-align: center;
-  color: black;
-  top: 400px;
+  color: #000;
+  top: 600px;
   right: 100px;
   font-size: 16px;
-  border: 2px solid white;
+  border: 2px solid #fff;
   background: transparent;
-  color: white;
+  color: #fff;
   cursor: pointer;
 }
 </style>

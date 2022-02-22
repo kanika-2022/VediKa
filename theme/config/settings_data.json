@@ -31,7 +31,30 @@
           },
           "page": "cart-landing"
         }
-      ]
+      ],
+      "global_config": {
+        "static": {
+          "props": {
+            "colors": {
+              "primary_color": "#7043f7",
+              "secondary_color": "#02d1cb",
+              "accent_color": "#FFFFFF",
+              "link_color": "#7043f7",
+              "button_secondary_color": "#000000",
+              "bg_color": "#F8F8F8"
+            },
+            "auth": {
+              "show_header_auth": false,
+              "show_footer_auth": false
+            }
+          }
+        },
+        "custom": {
+          "props": {
+            "header_icon_color": "#2c2a2a"
+          }
+        }
+      }
     },
     {
       "name": "Dark",

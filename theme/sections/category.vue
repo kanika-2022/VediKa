@@ -4,95 +4,58 @@
     :class="{
       'section-main-container': !settings.props.full_width.value,
       'full-width-section': settings.props.full_width.value,
-    }" 
-    style="
-    max-width: 100% !important;
-    background: white !important;
-    padding:0px !important;
-    margin:0px !important;"
+    }"
   >
     <div class="gallery-container">
       <div class="card-container">
         <div class="top-items">
           <div class="title-block">
-            <!-- <div
-              :style="'color:' + global_config.props.text_heading_link_color"
-              class="section-heading"
-              v-if="
-                (settings.props.title.value &&
-                    settings.props.title.value.length > 0) || settings.props.cta_text.value
-              "
-            >
+            <div
+              :style="'color:' + global_config.props.text_heading_link_color +'font-family:'+global_config.props.HeaderPrimaryFont +'font-size:'+global_config.props.HeaderFontSize"
+              class="section-heading" >
               {{ settings.props.title.value }}
             </div>
-            <fdk-link
-              :link="settings.props.cta_link.value"
-              class="link view-all-text"
-              :style="'color:' + global_config.props.text_heading_link_color"
-              v-if="settings.props.cta_text.value"
-              >{{ settings.props.cta_text.value }}</fdk-link
-            >
-          </div> -->
+           
+          </div>
           <template v-if="settings.blocks.length > 0">
-            <div id="image_grid" v-if="settings.props.layout.value === 'grid'">
-                  <div id="secondSub" class="subcontainer" 
-                      v-for="(block, index) in settings.blocks"
-                      :key="index">
-                          <a v-bind:href="block.props.image_url.value"><img v-bind:src="block.props.image.value"/></a>
-                            <div id="imageBorder"></div>
-                                <div id="sssub">
-                                    <div id="content">
-                                        <div v-if="block.props.heading_1.value">{{ block.props.heading_1.value }}</div>
-                                        <div v-if="block.props.heading_2.value">{{ block.props.heading_2.value}} </div>
-                                        <div v-if="block.props.heading_3.value">{{ block.props.heading_3.value}}</div>
-                                        <div>
-                                           <span  >
-                                            <a v-if="block.props.button_1.value" :href="block.props.button_1_link.value" type="button">
-                                            {{ block.props.button_1.value}} 
-                                            </a>
-                                            <a v-if="block.props.button_2.value" :href="block.props.button_2_link.value" type="button">
-                                            {{ block.props.button_2.value}} 
-                                            </a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+            <div v-if="settings.props.layout.value === 'grid'">
+             <div class="category_grid">
+                    <div class="category_item" v-for="(block, index) in settings.blocks"
+                      :key="index"
+                      ><a v-bind:href="block.props.category_link.value"> 
+                          <img
+                              style="max-width: 100%;height:100%;filter: opacity(.8) drop-shadow(0 0 0 black);"
+                              v-if="block.props.category_image.value"
+                              :src="block.props.category_image.value"
+                              alt=""
+                          /></a>
+                      <div class="itemName" v-if="block.props.category_name.value">{{block.props.category_name.value}}</div>                    
+                      <!-- <div class="instagram"></div>
+                      </div> -->
+                    </div>
 
-                        </div>
-
+              </div>
             </div>
-            <div id="image_horizontal" v-if="settings.props.layout.value === 'horizontal'">
+
+            <div v-if="settings.props.layout.value === 'horizontal'">
               <div class="glide-cont" :class="'glide'+ _uid" ref="glide" >
                 <div data-glide-el="track" class="glide__track">
                   <div class="glide__slides" :class="{ 'ssr-slides-box': !checkisBrowser() && !isMounted }">
-                    <div class="glide__slide"
-                      v-for="(block, index) in settings.blocks"
-                      :key="index"
-                      >
-                      <div id="secondSub" class="subcontainer">
-                          <a v-bind:href="block.props.image_url.value"><img v-bind:src="block.props.image.value"/></a>
-                            <div id="imageBorder"></div>
-                                <div id="sssub">
-                                    <div id="content">
-                                        <div v-if="block.props.heading_1.value">{{ block.props.heading_1.value }}</div>
-                                        <div v-if="block.props.heading_2.value">{{ block.props.heading_2.value}} </div>
-                                        <div v-if="block.props.heading_3.value">{{ block.props.heading_3.value}}</div>
-                                        <div>
-                                            <span>
-                                            <a v-if="block.props.button_1" :href="block.props.button_1_link.value" type="button">
-                                            {{ block.props.button_1.value}} 
-                                            </a>
-                                            <a v-if="block.props.button_1" :href="block.props.button_2_link.value" type="button">
-                                            {{ block.props.button_2.value}} 
-                                            </a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                        </div>
-
-                    </div>
+                    
+                    <div class="category_horizontal">
+                        <div class="category_item" v-for="(block, index) in settings.blocks"
+                            :key="index"
+                            ><a v-bind:href="block.props.category_link.value"> 
+                                <img
+                                    style="max-width: 100%;height:100%;filter: opacity(.8) drop-shadow(0 0 0 black);"
+                                    v-if="block.props.category_image.value"
+                                    :src="block.props.category_image.value"
+                                    alt=""
+                                /></a>
+                            <div class="itemName" v-if="block.props.category_name.value">{{block.props.category_name.value}}</div>                    
+                            <!-- <div class="instagram"></div>
+                            </div> -->
+                            </div>
                   </div>
                 </div>
                 <div class="glide__bullets" data-glide-el="controls[nav]" v-if="settings.blocks.length > settings.props.item_count.value">
@@ -136,12 +99,6 @@
             />
           </template>
           <div class="view-all-mobile" :class="{ 'view-all-horizontal': settings.props.layout.value === 'horizontal'}">
-            <!-- <fdk-link
-              :link="settings.props.cta_link.value"
-              class="view-all-text"
-              v-if="settings.props.cta_text.value"
-              >{{ settings.props.cta_text.value }}</fdk-link
-            > -->
           </div>
         </div>
       </div>
@@ -149,13 +106,17 @@
   </div>
 </template>
 <!-- #region  -->
-
 <settings>
 {
-    "name": "image-container",
-    "label": "Image Container",
+    "name": "category",
+    "label": "Category",
     "props": [
-       
+        {
+            "type": "text",
+            "id": "title",
+            "default": "",
+            "label": "Title"
+        },
         {
             "id": "layout",
             "type": "select",
@@ -172,12 +133,12 @@
         {
             "type": "range",
             "id": "item_count",
-            "min": 1,
-            "max": 2,
+            "min": 4,
+            "max": 4,
             "step": 1,
             "unit": "",
             "label": "No of items",
-            "default": 2,
+            "default": 4,
             "info": "Maximum items allowed per row for Horizontal view, for gallery max 5 are viewable and only 5 blocks are required"
         },
         {
@@ -188,81 +149,46 @@
             "info": "Check to allow items to take entire width of the viewport"
         }
     ],
-   "blocks": [
+    "blocks": [
         {
-            "type": "image-container",
-            "name": "Image Container",
+            "type": "category",
+            "name": "Category",
             "props": [
-                
                 {
                     "type": "image_picker",
-                    "id": "image",
-                    "default": "",
-                    "label": "Product Image"
+                    "id": "category_image",
+                    "label": "Gallery Image",
+                    "default": ""
                 },
                 {
                     "type": "url",
-                    "id": "image_url",
+                    "id": "category_link",
+                    "label": "Link",
                     "default": "",
-                    "label": "Redirect Link"
-                },
-
-                {
-                    "type": "text",
-                    "id": "heading_1",
-                    "default": "This is Heading 1",
-                    "label": "Heading1"
-                },
-                
-                {
-                    "type": "text",
-                    "id": "heading_2",
-                    "default": "This is heading 2",
-                    "label": "Heading2"
-                },
-                
-                {
-                    "type": "text",
-                    "id": "heading_3",
-                    "default": "This is Heading 3",
-                    "label": "Heading3"
+                    "info": "Link to redirect"
                 },
                 {
-                    "type": "text",
-                    "id": "button_1",
-                    "default": "Shop This",
-                    "label": "Button Text"
-                },
-                {
-                    "type": "url",
-                    "id": "button_1_link",
-                    "default": "",
-                    "label": "Redirect Link"
-                },
-                {
-                    "type": "text",
-                    "id": "button_2",
-                    "default": "Shop All",
-                    "label": "Button Text"
-                },
-                 {
-                    "type": "url",
-                    "id": "button_2_link",
-                    "default": "",
-                    "label": "Redirect Link"
+                    "type":"text",
+                    "id":"category_name",
+                    "label":"Category Name",
+                    "default":""
                 }
-
-               
             ]
         }
     ],
- "preset":{
+    "preset":{
       "blocks":[
         {
-          "name":"Image Container"
+          "name":"Category"
         },
         {
-          "name":"Image Container"
+          "name":"Category"
+        },
+        {
+          "name":"Category"
+        },
+        {
+          "name":"Category"
         }
       ]
     }
@@ -286,16 +212,16 @@
     }
 
     .title-block {
-      // display: flex;
+      display: flex;
       text-transform: uppercase;
       text-align: center;
       box-sizing: border-box;
       position: relative;
-      // max-width: @page-width;
-      // .margin-0-auto();
-      // > div {
-      //   flex: 0 0 100%;
-      // }
+      max-width: @page-width;
+      .margin-0-auto();
+      > div {
+        flex: 0 0 100%;
+      }
     }
     .link {
       position: absolute;
@@ -409,58 +335,40 @@
   }
   
 }
-#image_grid{
-  display:flex;
+.category_item{
+  position: relative;
+  width: 23%;
+  padding: 1%;
+  display:inline-block;
+  vertical-align: top;
 }
-#image_horizontal{
-  display: flex;
-  flex-direction: column;
+.itemName{
+    position: absolute;
+    font-family: "Century Gothic";
+    font-size: 16px;
+    color: white;
+    top: 50%;
+    left: 50%;
+
 }
-.subcontainer{
-    width:50%;
-    padding: 10px 10px 50px;
-    height:800px;
-    position:relative;
-    }
-    .subcontainer img{
-        width: 100%;
-        height: 100%;
-    }
-    #sssub{
-        position: absolute;
-        top:300px;
-        left:100px;
-        width:500px;
-        height:500px;
-    
-    }
-    #content{
-        text-align:center;
-        font-size:20px;
-        color:white;
-        line-height:2;
-    
-    }
-    #content div:nth-child(2){
-        font-size:50px;
-    }
-    #content div:nth-child(3){
-        margin-bottom: 40px;
-    }
-    #content a{
-        font-size:20px;
-        border:2px solid white;
-        margin: 0px 20px;
-        padding:20px;
-    }
-    #imageBorder{
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        right: 20px;
-        bottom: 60px;
-        border: 3px solid white;
-    }
+.category_item:hover{
+  transform:scale(1.1);
+  transition: all linear 0.3s;
+
+}
+.category_grid{
+    display:block;
+}
+.category_horizontal{
+    display: flex;
+    flex-basis: column;
+}
+.section-main-container{
+    max-width: 100% !important;
+    background: white  !important;
+    height: 100% !important;
+    padding: 20px 40px 50px !important;
+}
 </style>
 <script>
 import { detectMobileWidth, glidePaginate } from "../helper/utils";

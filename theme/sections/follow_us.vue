@@ -4,18 +4,13 @@
     :class="{
       'section-main-container': !settings.props.full_width.value,
       'full-width-section': settings.props.full_width.value,
-    }" 
-    style="
-    max-width: 100% !important;
-    background: white !important;
-    padding:0px !important;
-    margin:0px !important;"
+    }"
   >
     <div class="gallery-container">
       <div class="card-container">
         <div class="top-items">
           <div class="title-block">
-            <!-- <div
+            <div
               :style="'color:' + global_config.props.text_heading_link_color"
               class="section-heading"
               v-if="
@@ -25,73 +20,109 @@
             >
               {{ settings.props.title.value }}
             </div>
-            <fdk-link
-              :link="settings.props.cta_link.value"
-              class="link view-all-text"
-              :style="'color:' + global_config.props.text_heading_link_color"
-              v-if="settings.props.cta_text.value"
-              >{{ settings.props.cta_text.value }}</fdk-link
-            >
-          </div> -->
+           
+          </div>
           <template v-if="settings.blocks.length > 0">
-            <div id="image_grid" v-if="settings.props.layout.value === 'grid'">
-                  <div id="secondSub" class="subcontainer" 
-                      v-for="(block, index) in settings.blocks"
-                      :key="index">
-                          <a v-bind:href="block.props.image_url.value"><img v-bind:src="block.props.image.value"/></a>
-                            <div id="imageBorder"></div>
-                                <div id="sssub">
-                                    <div id="content">
-                                        <div v-if="block.props.heading_1.value">{{ block.props.heading_1.value }}</div>
-                                        <div v-if="block.props.heading_2.value">{{ block.props.heading_2.value}} </div>
-                                        <div v-if="block.props.heading_3.value">{{ block.props.heading_3.value}}</div>
-                                        <div>
-                                           <span  >
-                                            <a v-if="block.props.button_1.value" :href="block.props.button_1_link.value" type="button">
-                                            {{ block.props.button_1.value}} 
-                                            </a>
-                                            <a v-if="block.props.button_2.value" :href="block.props.button_2_link.value" type="button">
-                                            {{ block.props.button_2.value}} 
-                                            </a>
-                                            </span>
+            <div v-if="settings.props.layout.value === 'grid'">
+              <!-- <group-list
+                :cardlist="settings.blocks"
+                :itemcount="settings.props.item_count.value"
+                :cardtype="'GALLERY'"
+                :global_config="global_config"
+              ></group-list> -->
+            <div class="follow_grid">
+                  <div class="follow_us_item" v-for="(block, index) in settings.blocks"
+                  :key="index"
+                  >
+                      <div class="follow_us_item_div">
+                          <a v-if="block.props.instagram_image.value"> 
+                              <img
+                                  style="max-width: 100%;height:100%"
+                                  v-if="block.props.instagram_image.value"
+                                  :src="block.props.instagram_image.value"
+                                  alt=""
+                              />
+                              </a>
+                          <div class="instagram" @click="openModal(index)" :id="index"></div>
+                      </div>
+                      <div :id='"modal-"+index' class="modal">
+                          <div id="modalContent">
+                              <div id="col1" v-if="block.props.instagram_image.value">
+                                  <img
+                                  style="max-width: 100%;height:100%"
+                                  v-if="block.props.instagram_image.value"
+                                  :src="block.props.instagram_image.value"
+                                  alt=""
+                                  />
+                                  
+                              </div>
+                             <div class="description" id="col2">
+                                  <div class="instafeed-header">
+                                    <button aria-label='delete item' type='button' style="float:right" @click="closeModal(index)">X</button>
+                                    <object>
+                                      <a href="https://www.instagram.com/_vedikam" target="_blank" rel="noopener">
+                                      <img src="//instafeed.nfcube.com/assets/img/instagram-logo.png" data-feed-id="insta-feed" class="profile-picture js-lazy-image" data-src="false" alt="instagram profile picture"></a></object><object class="name-section"><a class="fullname" href="https://www.instagram.com/_vedikam/" target="_blank" rel="noopener"><div class="fullname instafeed-text" data-feed-id="insta-feed">_vedikam
+
+                                      </div>
+                                      <div class="username">@_vedikam</div>
+                                    </a>
+                                </object></div>
+                                <hr>
+                                <div class="box-content">
+                                    <div class="sub-header">
+                                        <div class="post-engagement"></div>
+                                        <div class="arrows">
+                                            <object>
+                                                <a href="#1-insta-feed">
+                                                    <img src="//instafeed.nfcube.com/assets/img/pixel.gif" alt="previous image">
+                                                </a>
+                                            </object>
+                                            <object>
+                                                <a href="#3-insta-feed">
+                                                    <img src="//instafeed.nfcube.com/assets/img/pixel.gif" alt="next image">
+                                                </a>
+                                            </object>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="instafeed-caption">Introducing @vmlliving - Handpainted &amp; handcrafted Home &amp; Lifestyle products created from the leftover materials of some of your favourite @_vedikam prints! 
 
-                        </div>
+                                Join us on our journey towards #ZeroWaste ! Please share &amp; follow for more. 
+                                
+                                #VMLliving #LimitedStock #WatchThisSpace #sustainability #reusereducerecycle #shopnow #comingsoon #NewArrivals #accessories #totebags #interiordesign #decor #sustainableliving #zerowaste #homeandlifestyle #handpainted #Art #lifestyle</div>
+                                <div class="post-date">FEBRUARY 15 • 
+                                    <object>
+                                        <a href="https://www.instagram.com/p/CZ_4tqvMeKK/" target="_blank" rel="noopener" class="follow">View on Instagram
+
+                                        </a>
+                                    </object>
+                                </div>
+                            </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+           </div>
 
             </div>
-            <div id="image_horizontal" v-if="settings.props.layout.value === 'horizontal'">
+            <div v-if="settings.props.layout.value === 'horizontal'">
               <div class="glide-cont" :class="'glide'+ _uid" ref="glide" >
                 <div data-glide-el="track" class="glide__track">
                   <div class="glide__slides" :class="{ 'ssr-slides-box': !checkisBrowser() && !isMounted }">
-                    <div class="glide__slide"
-                      v-for="(block, index) in settings.blocks"
-                      :key="index"
-                      >
-                      <div id="secondSub" class="subcontainer">
-                          <a v-bind:href="block.props.image_url.value"><img v-bind:src="block.props.image.value"/></a>
-                            <div id="imageBorder"></div>
-                                <div id="sssub">
-                                    <div id="content">
-                                        <div v-if="block.props.heading_1.value">{{ block.props.heading_1.value }}</div>
-                                        <div v-if="block.props.heading_2.value">{{ block.props.heading_2.value}} </div>
-                                        <div v-if="block.props.heading_3.value">{{ block.props.heading_3.value}}</div>
-                                        <div>
-                                            <span>
-                                            <a v-if="block.props.button_1" :href="block.props.button_1_link.value" type="button">
-                                            {{ block.props.button_1.value}} 
-                                            </a>
-                                            <a v-if="block.props.button_1" :href="block.props.button_2_link.value" type="button">
-                                            {{ block.props.button_2.value}} 
-                                            </a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
+                    
+                    <div class="follow_horizontal">
+                        <div class="follow_us_item" v-for="(block, index) in settings.blocks"
+                        :key="index"
+                        > 
+                          <div id="key" v-if="block.props.instagram_image.value">
+                                <img
+                                    style="max-width: 100%;height:100%"
+                                    v-if="block.props.instagram_image.value"
+                                    :src="block.props.instagram_image.value"
+                                    alt=""
+                                />
+                            <div class="instagram"></div>
+                            </div>
                         </div>
-
                     </div>
                   </div>
                 </div>
@@ -136,12 +167,6 @@
             />
           </template>
           <div class="view-all-mobile" :class="{ 'view-all-horizontal': settings.props.layout.value === 'horizontal'}">
-            <!-- <fdk-link
-              :link="settings.props.cta_link.value"
-              class="view-all-text"
-              v-if="settings.props.cta_text.value"
-              >{{ settings.props.cta_text.value }}</fdk-link
-            > -->
           </div>
         </div>
       </div>
@@ -152,10 +177,15 @@
 
 <settings>
 {
-    "name": "image-container",
-    "label": "Image Container",
+    "name": "follow_us",
+    "label": "Follow Us",
     "props": [
-       
+        {
+            "type": "text",
+            "id": "title",
+            "default": "",
+            "label": "Title"
+        },
         {
             "id": "layout",
             "type": "select",
@@ -163,6 +193,10 @@
                 {
                     "value": "grid",
                     "text": "Grid View"
+                },
+                {
+                    "value": "horizontal",
+                    "text": "Horizontal View"
                 }
             ],
             "default": "grid",
@@ -172,12 +206,12 @@
         {
             "type": "range",
             "id": "item_count",
-            "min": 1,
-            "max": 2,
+            "min": 4,
+            "max": 4,
             "step": 1,
             "unit": "",
             "label": "No of items",
-            "default": 2,
+            "default": 4,
             "info": "Maximum items allowed per row for Horizontal view, for gallery max 5 are viewable and only 5 blocks are required"
         },
         {
@@ -188,81 +222,53 @@
             "info": "Check to allow items to take entire width of the viewport"
         }
     ],
-   "blocks": [
+    "blocks": [
         {
-            "type": "image-container",
-            "name": "Image Container",
+            "type": "follow_us",
+            "name": "Follow Us",
             "props": [
-                
                 {
                     "type": "image_picker",
-                    "id": "image",
-                    "default": "",
-                    "label": "Product Image"
+                    "id": "instagram_image",
+                    "label": "Instagram Image",
+                    "default": ""
                 },
                 {
                     "type": "url",
-                    "id": "image_url",
+                    "id": "instagram_link",
+                    "label": "Instagram Link",
                     "default": "",
-                    "label": "Redirect Link"
-                },
-
-                {
-                    "type": "text",
-                    "id": "heading_1",
-                    "default": "This is Heading 1",
-                    "label": "Heading1"
-                },
-                
-                {
-                    "type": "text",
-                    "id": "heading_2",
-                    "default": "This is heading 2",
-                    "label": "Heading2"
-                },
-                
-                {
-                    "type": "text",
-                    "id": "heading_3",
-                    "default": "This is Heading 3",
-                    "label": "Heading3"
+                    "info": "Link to redirect"
                 },
                 {
-                    "type": "text",
-                    "id": "button_1",
-                    "default": "Shop This",
-                    "label": "Button Text"
+                    "type": "image_picker",
+                    "id": "instagram_video_image",
+                    "label": "Instagram Video Cover",
+                    "default": ""
                 },
                 {
                     "type": "url",
-                    "id": "button_1_link",
+                    "id": "instagram_video_link",
+                    "label": "Instagram Video Link",
                     "default": "",
-                    "label": "Redirect Link"
-                },
-                {
-                    "type": "text",
-                    "id": "button_2",
-                    "default": "Shop All",
-                    "label": "Button Text"
-                },
-                 {
-                    "type": "url",
-                    "id": "button_2_link",
-                    "default": "",
-                    "label": "Redirect Link"
+                    "info": "Link to redirect"
                 }
-
-               
             ]
         }
     ],
- "preset":{
+    "preset":{
       "blocks":[
         {
-          "name":"Image Container"
+          "name":"Follow Us"
         },
         {
-          "name":"Image Container"
+          "name":"Follow Us"
+        },
+        {
+          "name":"Follow Us"
+        },
+        {
+          "name":"Follow Us"
         }
       ]
     }
@@ -286,16 +292,16 @@
     }
 
     .title-block {
-      // display: flex;
+      display: flex;
       text-transform: uppercase;
       text-align: center;
       box-sizing: border-box;
       position: relative;
-      // max-width: @page-width;
-      // .margin-0-auto();
-      // > div {
-      //   flex: 0 0 100%;
-      // }
+      max-width: @page-width;
+      .margin-0-auto();
+      > div {
+        flex: 0 0 100%;
+      }
     }
     .link {
       position: absolute;
@@ -409,58 +415,97 @@
   }
   
 }
-#image_grid{
-  display:flex;
+.follow_us_item_div{
+  position: relative;
+  width: 23%;
+  padding: 1%;
+  display:inline-block;
+  vertical-align: top;
 }
-#image_horizontal{
-  display: flex;
-  flex-direction: column;
+.follow_us_item:hover .instagram{
+  opacity: 1;
+  cursor:pointer;
 }
-.subcontainer{
-    width:50%;
-    padding: 10px 10px 50px;
-    height:800px;
-    position:relative;
-    }
-    .subcontainer img{
-        width: 100%;
-        height: 100%;
-    }
-    #sssub{
-        position: absolute;
-        top:300px;
-        left:100px;
-        width:500px;
-        height:500px;
-    
-    }
-    #content{
-        text-align:center;
-        font-size:20px;
-        color:white;
-        line-height:2;
-    
-    }
-    #content div:nth-child(2){
-        font-size:50px;
-    }
-    #content div:nth-child(3){
-        margin-bottom: 40px;
-    }
-    #content a{
-        font-size:20px;
-        border:2px solid white;
-        margin: 0px 20px;
-        padding:20px;
-    }
-    #imageBorder{
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        right: 20px;
-        bottom: 60px;
-        border: 3px solid white;
-    }
+
+.instagram{
+    opacity: 0;
+    position: absolute;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    transition: all .2s linear;
+}
+.instagram::before {
+    content: ' ';
+    opacity: 1;
+    background: url(/assets/img/instagram-icon.svg) no-repeat center center;
+    background-size: 20px 20px;
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.instagram::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: .5;
+}
+.follow_grid{
+    display:block;
+}
+.follow_horizontal{
+    display: flex;
+    flex-basis: column;
+}
+.section-main-container{
+    max-width: 100% !important;
+    background: white  !important;
+    height: 100% !important;
+    padding: 20px 40px 50px !important;
+}
+ #modalContent{
+    width: 50%;
+    background: white;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    display:flex;
+    overflow-y:scroll;
+
+}
+.modal{
+    width:100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    display:none;
+    position: fixed;
+    top: 0px;
+    z-index: 100000000;
+    left: 0;
+}
+#col1{
+    width: 60%;
+    padding: 10px;
+}
+#col2{
+    width: 40%;
+    padding: 10px;
+}
+#col1 img{
+    max-width: 100%;
+}
 </style>
 <script>
 import { detectMobileWidth, glidePaginate } from "../helper/utils";
@@ -471,7 +516,6 @@ import Glide from '@glidejs/glide'
 import '../../node_modules/@glidejs/glide/dist/css/glide.core.min.css';
 import '../../node_modules/@glidejs/glide/dist/css/glide.theme.min.css';
 import placeholderItemsVue from "../global/components/sections/placeholder-items.vue";
-
 export default {
   props: ["settings","global_config"],
   components: {
@@ -513,6 +557,17 @@ export default {
     };
   },
   methods: {
+    openModal(instafeedId){
+      let feed_id = "modal-"+instafeedId;
+      document.getElementById(feed_id).style.display='block';
+      window.history.pushState('', 'New Feed', '#'+instafeedId+'-insta-feed');
+
+    },
+    closeModal(instafeedId){
+      let feed_id = "modal-"+instafeedId;
+      document.getElementById(feed_id).style.display='none';
+      window.history.pushState('','','');
+    },
     checkisBrowser(){
       return isBrowser
     },
@@ -602,5 +657,6 @@ export default {
   beforeDestroy() {
     this.cleanupComponent()
   },
+
 };
 </script>

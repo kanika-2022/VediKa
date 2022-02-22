@@ -2,7 +2,9 @@
   <div
     class="main-container"
     :style="`--text_heading_link_color: ${global_config.props.text_heading_link_color};--button_tertiary_hover_color: ${global_config.props.button_tertiary_hover_color};--button_tertiary_hover_text_color:${global_config.props.button_tertiary_hover_text_color};--button_tertiary_color:${global_config.props.button_tertiary_color};--button_tertiary_label_color:${global_config.props.button_tertiary_label_color}; color: ${global_config.props.text_body_color}`"
-  >
+  > 
+    <sections page="product-description" />
+
     <div
       class="product-desc-container"
       v-if="context && context.product && context.product.medias"

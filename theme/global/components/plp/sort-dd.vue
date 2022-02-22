@@ -1,6 +1,6 @@
 <template>
   <div class="items sort-list regular-sm">
-    <span class="dd-label">Sort by:</span>
+    <!-- <span class="dd-label">Sort by:</span> -->
     <div class="selected" v-on:click="sortOpen = !sortOpen">
       <span class="selectedSort"> {{ selectedsort }} </span>
       <img src="../../../assets/images/arrow-dropdown-black.svg" />
@@ -15,14 +15,14 @@
           :key="sorttype.value + index"
           v-on:click="updateSelection(sorttype.value)"
         >
-          <fdk-inline-svg
+          <!-- <fdk-inline-svg
             v-if="!sorttype.is_selected"
             :src="'regular'"
           ></fdk-inline-svg>
           <img
             src="../../../assets/images/radio-selected.svg"
             v-if="sorttype.is_selected"
-          />
+          /> -->
           <span>{{ sorttype.name }}</span>
         </li>
       </ul>
@@ -98,6 +98,8 @@ export default {
     align-items: center;
     justify-content: flex-start;
     display: flex;
+    border: 1px solid black;
+    padding: 5px 0px 5px 5px;
     .user-select-none();
   }
   &:last-child {
@@ -113,7 +115,7 @@ export default {
     top: 32px;
     z-index: @menu;
     margin: auto;
-    left: 30%;
+    // left: 30%;
     width: 280px;
 
     @media @mobile {
@@ -149,6 +151,7 @@ export default {
       .selected {
         .selectedSort {
           display: none;
+          margin-right:180px;
         }
       }
       .menu {
